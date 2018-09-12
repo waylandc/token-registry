@@ -5,5 +5,6 @@ export const NETWORKS = {
   '4': 'Rinkeby test network',
   '42': 'Kovan test network',
   '4447': 'Truffle Develop Network',
+  '500': 'rMBP localhost',
   '5777': 'Ganache Blockchain'
 }

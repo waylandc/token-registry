@@ -1,21 +1,20 @@
 <template>
   <div>
-    <MyWallet/>
+    <MySmartContract/>>
   </div>
 </template>
-
 <script>
 // @ is an alias to /src
-import MyWallet from '@/components/MyWallet.vue'
+import MySmartContract from '@/components/MySmartContract.vue'
 
 export default {
   name: 'home',
   beforeCreate () {
-    // console.log('registerWeb3 Action dispatched from Home.vue')
+    // console.log('registerWeb3 Action dispatched from SmartContract.vue')
     this.$store.dispatch('registerWeb3')
   },
   components: {
-    MyWallet
+    MySmartContract
   }
 }
 </script>

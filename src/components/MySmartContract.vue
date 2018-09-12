@@ -1,4 +1,4 @@
-<template>
+<template v-if='web3Setup.length > 0'>
   <div class='hello'>
     <h1>Welcome to Your Vue.js Solidity Smart Contract App</h1>
     <h1>Good to Go!</h1>
@@ -11,16 +11,38 @@
     <p>
       Try changing the value stored on <strong>line 37</strong> of App.js.
     </p>
-    <div>The stored value is: {{ web3.balance }}</div>
+    <div>The stored value is: {{ x }}</div>
   </div>
 </template>
 
 <script>
+import SimpleStorageContract from '../SimpleStorage'
+
 export default {
-  name: 'HelloWorld',
+  name: 'MySmartContract',
+  data () {
+    return {
+      x: undefined
+    }
+  },
+  beforeCreate: function () {
+    console.log(this.$store.state.web3)
+    SimpleStorageContract.init().then(() => {
+      SimpleStorageContract.set(42, this.$store.state.web3.coinbase).then(() => {
+        this.getVal()
+      })
+    })
+  },
   computed: {
     web3 () {
       return this.$store.state.web3
+    }
+  },
+  methods: {
+    getVal () {
+      SimpleStorageContract.get().then(val => {
+        this.x = val
+      })
     }
   }
 }
