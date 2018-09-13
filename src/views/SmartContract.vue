@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MySmartContract/>>
+    <MySmartContract/>
   </div>
 </template>
 <script>

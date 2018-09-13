@@ -4,14 +4,17 @@
     <h1>Good to Go!</h1>
     <p>Your Truffle Box is installed and ready.</p>
     <h2>Smart Contract Example</h2>
-    <p>
-      If your contracts compiled and migrated successfully, below will show
-      a stored value of 42 (by default).
-    </p>
-    <p>
-      Try changing the value stored on <strong>line 37</strong> of App.js.
-    </p>
-    <div>The stored value is: {{ x }}</div>
+    <div>The stored value is: {{ x }} </div>
+    <form @submit.prevent="changeValue">
+      <label>New Value</label>
+      <input
+        name="newValue"
+        label="Set Value"
+        type="text"
+        v-model="x"
+      />
+      <button type="submit">Change Value of Contract</button>
+    </form>
   </div>
 </template>
 
@@ -25,13 +28,8 @@ export default {
       x: undefined
     }
   },
-  beforeCreate: function () {
-    console.log(this.$store.state.web3)
-    SimpleStorageContract.init().then(() => {
-      SimpleStorageContract.set(42, this.$store.state.web3.coinbase).then(() => {
-        this.getVal()
-      })
-    })
+  created: function () {
+    this.getVal()
   },
   computed: {
     web3 () {
@@ -39,9 +37,17 @@ export default {
     }
   },
   methods: {
+    changeValue () {
+      this.$store.dispatch('changeValue',
+        { newValue: this.x })
+    },
     getVal () {
-      SimpleStorageContract.get().then(val => {
-        this.x = val
+      SimpleStorageContract.init().then(() => {
+        SimpleStorageContract.get().then(val => {
+          this.x = val
+        }).then(val => {
+          console.log('finished simpleStorage.get, ' + val)
+        })
       })
     }
   }

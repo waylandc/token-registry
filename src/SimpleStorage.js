@@ -27,6 +27,7 @@ const SimpleStorageContract = {
         resolve(tx)
         console.log(tx)
       }).catch(err => {
+        console.log(err)
         reject(err)
       })
     }).catch(err => console.log(err))
