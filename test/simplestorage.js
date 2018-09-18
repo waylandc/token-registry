@@ -1,7 +1,7 @@
-const SimpleStorage = artifacts.require("./SimpleStorage.sol")
+const SimpleStorage = artifacts.require('./SimpleStorage.sol')
 
-contract("SimpleStorage", accounts => {
-  it("...should store the value 89.", async () => {
+contract('SimpleStorage', accounts => {
+  it('...should store the value 89.', async () => {
     const simpleStorageInstance = await SimpleStorage.deployed()
 
     // Set value of 89
@@ -10,6 +10,10 @@ contract("SimpleStorage", accounts => {
     // Get stored value
     const storedData = await simpleStorageInstance.get.call()
 
-    assert.equal(storedData, 89, "The value 89 was not stored.")
+    assert.equal(storedData, 89, 'The value 89 was not stored.')
   })
+  // it('...should retrieve the value 89.', async () => {
+  //   const simpleStorageInstance = await SimpleStorage.deployed()
+
+  // })
 })

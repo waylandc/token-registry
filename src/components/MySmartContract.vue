@@ -8,7 +8,6 @@
     <form @submit.prevent="changeValue">
       <label>New Value</label>
       <input
-        name="newValue"
         label="Set Value"
         type="text"
         v-model="x"
@@ -25,7 +24,7 @@ export default {
   name: 'MySmartContract',
   data () {
     return {
-      x: undefined
+      x: ''
     }
   },
   created: function () {
